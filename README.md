@@ -27,12 +27,12 @@ node utils/generate-links.js
 
 ### Getting started
 
-First, install the Playwright MCP server with your client. A typical configuration looks like this:
+First, install the Playwright Accessibility MCP server with your client. A typical configuration looks like this:
 
 ```js
 {
   "mcpServers": {
-    "playwright": {
+    "playwright-accessibility": {
       "command": "npx",
       "args": [
         "playwright-accessibility-mcp-server@latest"
@@ -47,14 +47,14 @@ First, install the Playwright MCP server with your client. A typical configurati
 
 <details><summary><b>Install in VS Code</b></summary>
 
-You can also install the Playwright MCP server using the VS Code CLI:
+You can also install the Playwright Accessibility MCP server using the VS Code CLI:
 
 ```bash
 # For VS Code
 code --add-mcp '{"name":"playwright-accessibility","command":"npx","args":["playwright-accessibility-mcp-server@latest"]}'
 ```
 
-After installation, the Playwright MCP server will be available for use with your GitHub Copilot agent in VS Code.
+After installation, the Playwright Accessibility MCP server will be available for use with your GitHub Copilot agent in VS Code.
 </details>
 
 <details>
