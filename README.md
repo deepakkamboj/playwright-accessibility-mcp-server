@@ -16,6 +16,105 @@ This project is an implementation of a Model Context Protocol (MCP) server for a
 - **summarise-violations**: Summarizes accessibility violations from Axe results.
 - **write-violations-report**: Writes accessibility violations report to the output directory.
 
+### Requirements
+- Node.js 18 or newer
+- VS Code, Cursor, Windsurf, Claude Desktop or any other MCP client
+
+<!--
+// Generate using:
+node utils/generate-links.js
+-->
+
+### Getting started
+
+First, install the Playwright MCP server with your client. A typical configuration looks like this:
+
+```js
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+
+[<img src="https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF" alt="Install in VS Code">](https://insiders.vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522playwright%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522%2540playwright%252Fmcp%2540latest%2522%255D%257D) [<img alt="Install in VS Code Insiders" src="https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5">](https://insiders.vscode.dev/redirect?url=vscode-insiders%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522playwright%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522%2540playwright%252Fmcp%2540latest%2522%255D%257D)
+
+
+<details><summary><b>Install in VS Code</b></summary>
+
+You can also install the Playwright MCP server using the VS Code CLI:
+
+```bash
+# For VS Code
+code --add-mcp '{"name":"playwright-accessibility","command":"npx","args":["playwright-accessibility-mcp-server@latest"]}'
+```
+
+After installation, the Playwright MCP server will be available for use with your GitHub Copilot agent in VS Code.
+</details>
+
+<details>
+<summary><b>Install in Cursor</b></summary>
+
+Go to `Cursor Settings` -> `MCP` -> `Add new MCP Server`. Name to your liking, use `command` type with the command `npx playwright-accessibility-mcp-server`. You can also verify config or add command like arguments via clicking `Edit`.
+
+```js
+{
+  "mcpServers": {
+    "playwright-accessibility": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+</details>
+
+<details>
+<summary><b>Install in Windsurf</b></summary>
+
+Follow Windsuff MCP [documentation](https://docs.windsurf.com/windsurf/cascade/mcp). Use following configuration:
+
+```js
+{
+  "mcpServers": {
+    "playwright-accessibility": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+</details>
+
+<details>
+<summary><b>Install in Claude Desktop</b></summary>
+
+Follow the MCP install [guide](https://modelcontextprotocol.io/quickstart/user), use following configuration:
+
+```js
+{
+  "mcpServers": {
+    "playwright-accessibility": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+</details>
+
+
 ## Installation
 
 1. Clone the repository:
