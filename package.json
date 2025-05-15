@@ -1,0 +1,44 @@
+{
+  "name": "playwright-accessibility-mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for authentication using TMS for running Playwright tests",
+  "main": "dist/index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bin": {
+    "playwright-tms-auth-mcp": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js",
+    "dev": "concurrently \"npm run watch\" \"npm run inspector\"",
+    "debug": "node --inspect build/index.js",
+    "debug:watch": "concurrently \"npm run watch\" \"npm run debug\"",
+    "logs": "tail -n 20 -F ~/Library/Logs/Claude/mcp*.log",
+    "clean": "rm -rf build",
+    "start": "node build/index.js",
+    "smithery:build": "docker build -t mcp-server-starter -f Dockerfile.smithery .",
+    "smithery:run": "docker run -i --rm mcp-server-starter"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "4.9.1",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@playwright/test": "^1.52.0",
+    "axe-sarif-converter": "2.11.1",
+    "fs-extra": "8.0.1",
+    "uuid": "8.3.2",
+    "zod": "^3.12.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/uuid": "^10.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "_moduleAliases": {
+    "@": "src"
+  }
+}
