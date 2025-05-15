@@ -5,49 +5,50 @@ on:
     branches:
       - main
 
-# Add permissions block to grant write access
-permissions:
-  contents: write
-
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Node.js
+      
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
           registry-url: 'https://registry.npmjs.org/'
-          always-auth: true
-
+      
       - name: Install dependencies
-        run: npm install
-
-      - name: Run build
+        run: npm ci
+      
+      - name: Fix package.json issues
+        run: npm pkg fix
+      
+      - name: Lint
+        run: npm run lint
+        
+      - name: Run tests
+        run: npm test
+      
+      - name: Build TypeScript
         run: npm run build
-
-      - name: Package npm module
-        run: npm pack
-
-      - name: Configure Git user
+      
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+      - name: Update package version
+        run: npm version ${{ steps.get_version.outputs.VERSION }} --no-git-tag-version
+        
+      # Create npmrc file with auth token
+      - name: Create .npmrc file
         run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-      - name: Bump version
-        run: npm version patch -m "Bump version to %s [skip ci]"
-
-      - name: Push version changes
-        run: git push --follow-tags
-
-      - name: Publish to npm
-        run: npm publish
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
