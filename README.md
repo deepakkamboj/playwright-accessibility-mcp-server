@@ -8,8 +8,6 @@
 
 This project is an implementation of a Model Context Protocol (MCP) server for accessibility testing using Playwright and Axe. It provides tools to scan URLs, raw HTML, and batches of URLs for accessibility violations and summarize the results.
 
-Repository: [deepakkamboj/playwright-accessibility-mcp-server](https://github.com/deepakkamboj/playwright-accessibility-mcp-server)
-
 ## Features
 
 - **scan-url**: Scans a single URL for accessibility violations.
@@ -21,12 +19,14 @@ Repository: [deepakkamboj/playwright-accessibility-mcp-server](https://github.co
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/deepakkamboj/playwright-accessibility-mcp-server.git
    cd playwright-accessibility-mcp-server
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -41,6 +41,7 @@ Repository: [deepakkamboj/playwright-accessibility-mcp-server](https://github.co
 ### Starting the Server
 
 1. Start the server:
+
    ```bash
    npm start
    ```
@@ -53,6 +54,7 @@ This project implements the MCP protocol, allowing you to interact with the serv
 
 1. **Start the MCP Server**:
    Ensure the server is running by executing:
+
    ```bash
    npm start
    ```
@@ -62,6 +64,7 @@ This project implements the MCP protocol, allowing you to interact with the serv
 
 3. **Send MCP Requests**:
    Use the following tools via MCP requests:
+
    - `scan-url`: Analyze a single URL for accessibility violations.
    - `scan-html`: Analyze raw HTML content for accessibility violations.
    - `scan-batch`: Analyze multiple URLs for accessibility violations.
@@ -70,6 +73,7 @@ This project implements the MCP protocol, allowing you to interact with the serv
 
 4. **Example MCP Request**:
    Below is an example of an MCP request to write a violations report:
+
    ```json
    {
      "tool": "write-violations-report",
@@ -100,19 +104,18 @@ This project implements the MCP protocol, allowing you to interact with the serv
 For AI clients (e.g. Claude Desktop, Cursor, VS Code MCP extension), configure your `<client>_config.json`:
 
 ```json
-   {
-     "mcpServers": {
-       "playwright-accessibility-mcp-server": {
-         "command": "node",
-         "args": [
-           "${AbsolutePath}/build/index.js"
-         ]
-       }
-     }
-   }
+{
+  "mcpServers": {
+    "playwright-accessibility-mcp-server": {
+      "command": "node",
+      "args": ["${AbsolutePath}/build/index.js"]
+    }
+  }
+}
 ```
 
 Once the MCP server is running, you can invoke tools like:
+
 - `scan-url` (params: `{ "url": "https://google.com" }`)
 - `scan-html` (params: `{ "html": "<h1>Hello</h1>" }`)
 - `scan-batch` (params: `{ "urls": ["https://a.com","https://b.com"] }`)
@@ -123,22 +126,20 @@ Once the MCP server is running, you can invoke tools like:
 For local development, configure your `<client>_config.json` as follows:
 
 ```json
-   {
-     "mcpServers": {
-       "playwright-accessibility-mcp-server": {
-         "command": "node",
-         "args": [
-           "${AbsolutePath}/build/index.js"
-         ]
-       }
-     }
-   }
+{
+  "mcpServers": {
+    "playwright-accessibility-mcp-server": {
+      "command": "node",
+      "args": ["${AbsolutePath}/build/index.js"]
+    }
+  }
+}
 ```
-
 
 ## Development
 
 - To run the server in development mode:
+
   ```bash
   npm run dev
   ```
