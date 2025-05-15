@@ -1,8 +1,11 @@
 name: Release and Publish
-
 on:
   release:
-    types: [created]
+    types: [published]
+    
+#on:
+#  release:
+#    types: [created]
 
 # Add permissions block to grant write access
 permissions:
