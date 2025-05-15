@@ -32,22 +32,3 @@ jobs:
 
       - name: Run build
         run: npm run build
-
-      - name: Package npm module
-        run: npm pack
-
-      - name: Configure Git user
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-      - name: Bump version
-        run: npm version patch -m "Bump version to %s [skip ci]"
-
-      - name: Push version changes
-        run: git push --follow-tags
-
-      - name: Publish to npm
-        run: npm publish --verbose
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

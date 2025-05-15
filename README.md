@@ -8,13 +8,118 @@
 
 This project is an implementation of a Model Context Protocol (MCP) server for accessibility testing using Playwright and Axe. It provides tools to scan URLs, raw HTML, and batches of URLs for accessibility violations and summarize the results.
 
+> [!TIP]
+> The simplest way to get started is to use the one-line installation: `npx playwright-accessibility-mcp-server`. This will automatically download and run the latest version without having to manually install the package.
+
 ## Features
 
 - **scan-url**: Scans a single URL for accessibility violations.
 - **scan-html**: Scans raw HTML content for accessibility violations.
 - **scan-batch**: Scans multiple URLs for accessibility violations.
-- **summarise-violations**: Summarizes accessibility violations from Axe results.
+- **summarize-violations**: Summarizes accessibility violations from Axe results.
 - **write-violations-report**: Writes accessibility violations report to the output directory.
+
+### Requirements
+
+- Node.js 18 or newer
+- VS Code, Cursor, Windsurf, Claude Desktop or any other MCP client
+
+<!--
+// Generate using:
+node utils/generate-links.js
+-->
+
+### Getting started
+
+First, install the Playwright Accessibility MCP server with your client. A typical configuration looks like this:
+
+```js
+{
+  "mcpServers": {
+    "playwright-accessibility": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+
+[<img src="https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF" alt="Install in VS Code">](https://insiders.vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%7B%22name%22%3A%22playwright-accessibility%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22playwright-accessibility-mcp-server%40latest%22%5D%7D) [<img alt="Install in VS Code Insiders" src="https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5">](https://insiders.vscode.dev/redirect?url=vscode-insiders%3Amcp%2Finstall%3F%7B%22name%22%3A%22playwright-accessibility%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22playwright-accessibility-mcp-server%40latest%22%5D%7D)
+
+<details><summary><b>Install in VS Code</b></summary>
+
+You can also install the Playwright Accessibility MCP server using the VS Code CLI:
+
+```bash
+# For VS Code
+code --add-mcp '{"name":"playwright-accessibility","command":"npx","args":["playwright-accessibility-mcp-server@latest"]}'
+```
+
+After installation, the Playwright Accessibility MCP server will be available for use with your GitHub Copilot agent in VS Code.
+
+</details>
+
+<details>
+<summary><b>Install in Cursor</b></summary>
+
+Go to `Cursor Settings` -> `MCP` -> `Add new MCP Server`. Name to your liking, use `command` type with the command `npx playwright-accessibility-mcp-server`. You can also verify config or add command like arguments via clicking `Edit`.
+
+```js
+{
+  "mcpServers": {
+    "playwright-accessibility": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Install in Windsurf</b></summary>
+
+Follow Windsuff MCP [documentation](https://docs.windsurf.com/windsurf/cascade/mcp). Use following configuration:
+
+```js
+{
+  "mcpServers": {
+    "playwright-accessibility": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Install in Claude Desktop</b></summary>
+
+Follow the MCP install [guide](https://modelcontextprotocol.io/quickstart/user), use following configuration:
+
+```js
+{
+  "mcpServers": {
+    "playwright-accessibility": {
+      "command": "npx",
+      "args": [
+        "playwright-accessibility-mcp-server@latest"
+      ]
+    }
+  }
+}
+```
+
+</details>
 
 ## Installation
 
@@ -68,7 +173,7 @@ This project implements the MCP protocol, allowing you to interact with the serv
    - `scan-url`: Analyze a single URL for accessibility violations.
    - `scan-html`: Analyze raw HTML content for accessibility violations.
    - `scan-batch`: Analyze multiple URLs for accessibility violations.
-   - `summarise-violations`: Summarize accessibility violations from Axe results.
+   - `summarize-violations`: Summarize accessibility violations from Axe results.
    - `write-violations-report`: Write accessibility violations report to the output directory.
 
 4. **Example MCP Request**:
@@ -119,7 +224,7 @@ Once the MCP server is running, you can invoke tools like:
 - `scan-url` (params: `{ "url": "https://google.com" }`)
 - `scan-html` (params: `{ "html": "<h1>Hello</h1>" }`)
 - `scan-batch` (params: `{ "urls": ["https://a.com","https://b.com"] }`)
-- `summarise-violations` (params: `{ "result": <axe result> }`)
+- `summarize-violations` (params: `{ "result": <axe result> }`)
 
 ### MCP Local Dev Mode
 

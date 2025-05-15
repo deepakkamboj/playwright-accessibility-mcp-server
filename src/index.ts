@@ -12,27 +12,41 @@
  * https://modelcontextprotocol.io
  */
 
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { logMessage } from './utils/logger.js';
-import { registerScanBatchTool, registerScanHtmlTool, registerScanUrlTool, registerSummariseViolationsTool, registerWriteViolationsTool } from "./tools/tools.js";
 
+import { logMessage } from './utils/logger.js';
+import {
+  registerScanBatchTool,
+  registerScanHtmlTool,
+  registerScanUrlTool,
+  registerSummariseViolationsTool,
+  registerWriteViolationsTool,
+} from './tools/tools.js';
+import { projectRoot } from './utils/common.js';
+
+// Navigate up one directory to find the project root where package.json is located
+const packageJsonPath = path.resolve(projectRoot, 'package.json');
+
+// Read package.json to get the version
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+const version = packageJson.version || '0.1.0'; // Fallback to '0.1.0' if version is not found
 
 /**
  * Create a new MCP server instance with full capabilities
  */
 const server = new McpServer({
-  name: "playwright-tms-auth-mcp",
-  version: "0.1.0",
+  name: 'playwright-accessibility-mcp-server',
+  version,
   capabilities: {
     tools: {},
     resources: {},
     prompts: {},
-    streaming: true
-  }
+    streaming: true,
+  },
 });
 
 const logFilePath = path.resolve(process.cwd(), 'server.log');
@@ -56,7 +70,12 @@ try {
 
   logMessage('info', 'Successfully registered all tools');
 } catch (error) {
-  logMessage('error', `Failed to register tools: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  logMessage(
+    'error',
+    `Failed to register tools: ${
+      error instanceof Error ? error.message : 'Unknown error'
+    }`,
+  );
   process.exit(1);
 }
 
@@ -68,7 +87,12 @@ async function cleanup() {
     await server.close();
     logMessage('info', 'Server shutdown completed');
   } catch (error) {
-    logMessage('error', `Error during shutdown: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    logMessage(
+      'error',
+      `Error during shutdown: ${
+        error instanceof Error ? error.message : 'Unknown error'
+      }`,
+    );
   } finally {
     process.exit(0);
   }
@@ -88,9 +112,17 @@ async function main() {
     await server.connect(transport);
 
     logMessage('info', 'MCP Server started successfully');
-    console.error('MCP Server running on stdio transport');
+    // add version info to the log
+    logMessage('info', `MCP Server version: ${version}\n`);
+    logMessage('info', 'Listening for incoming connections...');
+    logMessage('info', 'MCP Server running on stdio transport');
   } catch (error) {
-    logMessage('error', `Failed to start server: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    logMessage(
+      'error',
+      `Failed to start server: ${
+        error instanceof Error ? error.message : 'Unknown error'
+      }`,
+    );
     process.exit(1);
   }
 }

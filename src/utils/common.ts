@@ -1,6 +1,15 @@
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 import { chromium, firefox, webkit } from '@playwright/test';
+
+/**
+ * Get the current directory path in ES module context
+ * @returns The current directory path
+ */
+function getCurrentDir() {
+  return path.dirname(fileURLToPath(import.meta.url));
+}
 
 /**
  * Find the project root by looking for the package.json file.
@@ -22,7 +31,7 @@ function findProjectRoot(startDir: string): string {
 }
 
 // Get project root
-const projectRoot = findProjectRoot(__dirname);
+export const projectRoot = findProjectRoot(getCurrentDir());
 
 // Define output directory relative to the project root
 const outputDir = path.join(projectRoot, 'output');
