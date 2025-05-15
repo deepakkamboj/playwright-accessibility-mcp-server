@@ -1,0 +1,52 @@
+name: Release and Publish
+
+on:
+  release:
+    types: [created]
+
+# Add permissions block to grant write access
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org/'
+          always-auth: true
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build
+
+      - name: Package npm module
+        run: npm pack
+
+      - name: Configure Git user
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Bump version
+        run: npm version patch -m "Bump version to %s [skip ci]"
+
+      - name: Push version changes
+        run: git push --follow-tags
+
+      - name: Publish to npm
+        run: npm publish --verbose
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
