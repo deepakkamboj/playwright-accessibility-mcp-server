@@ -42,8 +42,8 @@ jobs:
       - name: Update package.json version
         run: npm --no-git-tag-version version $VERSION
 
-      - name: Push version changes
-        run: git push --follow-tags
+      # Remove the git push step since we're in a detached HEAD state
+      # and we only need to update the version for publishing to npm
 
       - name: Run build
         run: npm run build
