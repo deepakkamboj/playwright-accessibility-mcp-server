@@ -1,11 +1,8 @@
 name: Release and Publish
+
 on:
   release:
     types: [published]
-    
-#on:
-#  release:
-#    types: [created]
 
 # Add permissions block to grant write access
 permissions:
@@ -32,12 +29,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run build
-        run: npm run build
-
-      - name: Package npm module
-        run: npm pack
-
       - name: Configure Git user
         run: |
           git config user.name "${GITHUB_ACTOR}"
@@ -48,6 +39,12 @@ jobs:
 
       - name: Push version changes
         run: git push --follow-tags
+
+      - name: Run build
+        run: npm run build
+
+      - name: Package npm module
+        run: npm pack
 
       - name: Publish to npm
         run: npm publish --verbose
