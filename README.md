@@ -6,7 +6,7 @@
 ![Zod](https://img.shields.io/badge/Zod-v3.21.4-purple) <!-- Updated version -->
 ![License](https://img.shields.io/badge/License-MIT-brightgreen)
 
-This project is an implementation of a Model Context Protocol (MCP) server for accessibility testing using Playwright and Axe. It provides tools to scan URLs, raw HTML, and batches of URLs for accessibility violations and summarize the results.
+This project is an implementation of a Model Context Protocol (MCP) server for accessibility testing using [Playwright](https://playwright.dev) and [Axe](https://www.npmjs.com/package/@axe-core/playwright). It provides tools to scan URLs, raw HTML, and batches of URLs for accessibility violations and summarize the results.
 
 > [!TIP]
 > The simplest way to get started is to use the one-line installation: `npx playwright-accessibility-mcp-server`. This will automatically download and run the latest version without having to manually install the package.
