@@ -121,6 +121,17 @@ Follow the MCP install [guide](https://modelcontextprotocol.io/quickstart/user),
 
 </details>
 
+
+## 𝗪𝗵𝘆 𝗔𝗰𝗰𝗲𝘀𝘀𝗶𝗯𝗶𝗹𝗶𝘁𝘆 𝗧𝗲𝘀𝘁𝗶𝗻𝗴 𝗠𝗮𝘁𝘁𝗲𝗿𝘀: 
+Accessibility testing ensures that digital content is usable by people with disabilities. It promotes inclusivity and compliance with standards like WCAG. By integrating accessibility testing into your workflow, you can create a better user experience for everyone. 🌍
+
+## 𝗪𝗵𝘆 𝗣𝗹𝗮𝘆𝘄𝗿𝗶𝗴𝗵𝘁 𝗔𝗰𝗰𝗲𝘀𝘀𝗶𝗯𝗶𝗹𝗶𝘁𝘆 𝗠𝗮𝘁𝘁𝗲𝗿𝘀: 
+Accessibility testing ensures that digital content is usable by people with disabilities. It promotes inclusivity and compliance with standards like WCAG. By integrating Playwright accessibility testing into your workflow, you can:
+
+📌𝗘𝗻𝗵𝗮𝗻𝗰𝗲 𝗨𝘀𝗲𝗿 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲: Make your applications usable for everyone, including people with disabilities.
+📌𝗘𝗻𝘀𝘂𝗿𝗲 𝗖𝗼𝗺𝗽𝗹𝗶𝗮𝗻𝗰𝗲: Meet legal and regulatory requirements for accessibility.
+📌𝗣𝗿𝗼𝗺𝗼𝘁𝗲 𝗜𝗻𝗰𝗹𝘂𝘀𝗶𝘃𝗶𝘁𝘆: Foster an inclusive digital environment where everyone can access and benefit from your content.
+
 ## Installation
 
 1. Clone the repository:
