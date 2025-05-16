@@ -34,8 +34,13 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-      - name: Bump version
-        run: npm version patch -m "Bump version to %s [skip ci]"
+      - name: Set version from release
+        run: |
+          RELEASE_VERSION=${GITHUB_REF#refs/tags/}
+          # Remove 'v' prefix if present
+          VERSION=${RELEASE_VERSION#v}
+          echo "Setting version to $VERSION based on release tag"
+          npm version $VERSION --no-git-tag-version
 
       - name: Push version changes
         run: git push --follow-tags
