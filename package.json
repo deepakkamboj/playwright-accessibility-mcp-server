@@ -14,6 +14,11 @@
     "sarif"
   ],
   "author": "Deepak Kamboj",
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepakkamboj/playwright-accessibility-mcp-server.git"
+  },
+  "homepage": "https://github.com/deepakkamboj/playwright-accessibility-mcp-server",
   "license": "MIT",
   "type": "module",
   "bin": {
